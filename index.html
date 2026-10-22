@@ -10,23 +10,45 @@
     :root { --fg:#e6e8eb; --mute:#a2a9b1; --line:#3a4047; --head:#262b31; --acc:#6aaeff; --warn:#3a3220; --bg:#16191d; }
   }
   * { box-sizing:border-box; }
-  body { margin:0; padding:20px 16px 40px; font:15px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif; color:var(--fg); background:var(--bg); }
-  main { max-width:860px; margin:0 auto; }
-  h1 { font-size:1.35rem; margin:0 0 4px; }
-  h2 { font-size:1.05rem; margin:28px 0 8px; color:var(--acc); }
-  p.sub { margin:0 0 12px; color:var(--mute); }
+  html { -webkit-text-size-adjust:100%; text-size-adjust:100%; }
+  body { margin:0; padding:20px max(16px, env(safe-area-inset-right)) 40px max(16px, env(safe-area-inset-left)); font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif; color:var(--fg); background:var(--bg); overflow-wrap:break-word; }
+  main { max-width:1100px; margin:0 auto; }
+  h1 { font-size:1.4rem; line-height:1.25; margin:0 0 6px; }
+  h2 { font-size:1.1rem; margin:30px 0 10px; color:var(--acc); }
+  p.sub { margin:0 0 12px; color:var(--mute); max-width:75ch; }
+  .tbl { overflow-x:auto; -webkit-overflow-scrolling:touch; }
   table { width:100%; border-collapse:collapse; margin:0 0 4px; }
-  th, td { text-align:left; padding:7px 9px; border-bottom:1px solid var(--line); vertical-align:top; }
-  th { background:var(--head); font-size:.82rem; text-transform:uppercase; letter-spacing:.03em; }
+  th, td { text-align:left; padding:8px 10px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { background:var(--head); font-size:.8rem; text-transform:uppercase; letter-spacing:.03em; }
   td.n, th.n { text-align:right; white-space:nowrap; font-variant-numeric:tabular-nums; }
-  td.item { font-weight:600; }
+  th { white-space:nowrap; }
+  td.item { font-weight:600; min-width:11rem; }
+  tr.tot td { background:var(--head); }
   .sv { display:inline-block; margin-left:4px; padding:0 6px; border-radius:9px; background:var(--warn); border:1px solid var(--line); color:var(--fg); font-size:.72rem; font-weight:600; white-space:nowrap; }
-  td.note { color:var(--mute); font-size:.9rem; }
-  .box { background:var(--warn); border:1px solid var(--line); border-radius:6px; padding:10px 12px; margin:14px 0; font-size:.92rem; }
-  ul { margin:6px 0 0 18px; padding:0; }
-  footer { margin-top:28px; color:var(--mute); font-size:.85rem; }
-  @media (max-width:560px) { th, td { padding:6px 5px; font-size:.88rem; } }
-  @media print { body { padding:0; font-size:12px; } h2 { margin-top:16px; } }
+  td.note { color:var(--mute); font-size:.9rem; min-width:16rem; }
+  .box { background:var(--warn); border:1px solid var(--line); border-radius:6px; padding:10px 12px; margin:14px 0; font-size:.94rem; max-width:75ch; }
+  ul { margin:6px 0 0 18px; padding:0; max-width:80ch; }
+  li { margin:0 0 8px; }
+  footer { margin-top:28px; color:var(--mute); font-size:.85rem; max-width:75ch; }
+
+  /* Celular: cada fila pasa a ser una tarjeta, sin scroll horizontal */
+  @media (max-width:720px) {
+    body { padding-top:16px; font-size:16px; }
+    .tbl { overflow:visible; }
+    table, tbody, tr, td { display:block; width:100%; }
+    thead { position:absolute; left:-9999px; }
+    tr { border:1px solid var(--line); border-radius:8px; margin:0 0 10px; padding:6px 12px 8px; }
+    tr.tot { background:var(--head); }
+    td { display:flex; justify-content:space-between; align-items:baseline; gap:14px; border:0; padding:4px 0; text-align:right; }
+    td::before { content:attr(data-label); flex:0 0 auto; max-width:48%; color:var(--mute); font-size:.8rem; text-align:left; }
+    td.item { display:block; text-align:left; font-size:1rem; padding:2px 0 6px; margin-bottom:4px; border-bottom:1px solid var(--line); }
+    td.item::before { content:none; }
+    td.note { display:block; min-width:0; text-align:left; padding-top:6px; }
+    td.note::before { display:block; max-width:none; margin-bottom:2px; }
+    td:empty { display:none; }
+    td.n { white-space:normal; }
+  }
+  @media print { body { padding:0; font-size:12px; } h2 { margin-top:16px; } tr { break-inside:avoid; } }
 </style>
 </head>
 <body>
@@ -42,37 +64,37 @@
 </div>
 
 <h2>1 · Fijos mensuales</h2>
-<div style="overflow-x:auto"><table>
+<div class="tbl"><table>
 <thead><tr><th>Ítem</th><th class="n">Bruto</th><th class="n">AFP 10,58 %</th><th class="n">Salud 7 %</th><th class="n">Cesantía 0,6 %</th><th class="n">Líquido</th><th>Tipo</th></tr></thead><tbody>
-<tr><td class="item">Sueldo base</td><td class="n">$600.000</td><td class="n">$63.480</td><td class="n">$42.000</td><td class="n">$3.599</td><td class="n"><b>$490.921</b></td><td>imponible</td></tr>
-<tr><td class="item">Gratificación</td><td class="n">$219.115</td><td class="n">$23.182</td><td class="n">$15.338</td><td class="n">$1.315</td><td class="n"><b>$179.280</b></td><td>imponible</td></tr>
-<tr><td class="item">Asignación de responsabilidad</td><td class="n">$100.000</td><td class="n">$10.580</td><td class="n">$7.000</td><td class="n">$600</td><td class="n"><b>$81.820</b></td><td>imponible</td></tr>
-<tr><td class="item">Bono hidratación</td><td class="n">$24.600</td><td class="n">$2.603</td><td class="n">$1.722</td><td class="n">$148</td><td class="n"><b>$20.127</b></td><td>imponible</td></tr>
-<tr><td class="item">Colación</td><td class="n">$40.000</td><td class="n">–</td><td class="n">–</td><td class="n">–</td><td class="n"><b>$40.000</b></td><td>no imponible</td></tr>
-<tr><td class="item">Total fijos</td><td class="n"><b>$983.715</b></td><td class="n"><b>$99.845</b></td><td class="n"><b>$66.060</b></td><td class="n"><b>$5.662</b></td><td class="n"><b>$812.148</b></td><td></td></tr>
+<tr><td class="item" data-label="Ítem">Sueldo base</td><td class="n" data-label="Bruto">$600.000</td><td class="n" data-label="AFP 10,58 %">$63.480</td><td class="n" data-label="Salud 7 %">$42.000</td><td class="n" data-label="Cesantía 0,6 %">$3.599</td><td class="n" data-label="Líquido"><b>$490.921</b></td><td data-label="Tipo">imponible</td></tr>
+<tr><td class="item" data-label="Ítem">Gratificación</td><td class="n" data-label="Bruto">$219.115</td><td class="n" data-label="AFP 10,58 %">$23.182</td><td class="n" data-label="Salud 7 %">$15.338</td><td class="n" data-label="Cesantía 0,6 %">$1.315</td><td class="n" data-label="Líquido"><b>$179.280</b></td><td data-label="Tipo">imponible</td></tr>
+<tr><td class="item" data-label="Ítem">Asignación de responsabilidad</td><td class="n" data-label="Bruto">$100.000</td><td class="n" data-label="AFP 10,58 %">$10.580</td><td class="n" data-label="Salud 7 %">$7.000</td><td class="n" data-label="Cesantía 0,6 %">$600</td><td class="n" data-label="Líquido"><b>$81.820</b></td><td data-label="Tipo">imponible</td></tr>
+<tr><td class="item" data-label="Ítem">Bono hidratación</td><td class="n" data-label="Bruto">$24.600</td><td class="n" data-label="AFP 10,58 %">$2.603</td><td class="n" data-label="Salud 7 %">$1.722</td><td class="n" data-label="Cesantía 0,6 %">$148</td><td class="n" data-label="Líquido"><b>$20.127</b></td><td data-label="Tipo">imponible</td></tr>
+<tr><td class="item" data-label="Ítem">Colación</td><td class="n" data-label="Bruto">$40.000</td><td class="n" data-label="AFP 10,58 %">–</td><td class="n" data-label="Salud 7 %">–</td><td class="n" data-label="Cesantía 0,6 %">–</td><td class="n" data-label="Líquido"><b>$40.000</b></td><td data-label="Tipo">no imponible</td></tr>
+<tr class="tot"><td class="item" data-label="Ítem">Total fijos</td><td class="n" data-label="Bruto"><b>$983.715</b></td><td class="n" data-label="AFP 10,58 %"><b>$99.845</b></td><td class="n" data-label="Salud 7 %"><b>$66.060</b></td><td class="n" data-label="Cesantía 0,6 %"><b>$5.662</b></td><td class="n" data-label="Líquido"><b>$812.148</b></td><td data-label="Tipo"></td></tr>
 </tbody></table></div>
 <p class="sub">Los fijos suman $943.715 imponibles; tras AFP, salud y cesantía quedan $772.148, que equivale a 10.7 UTM y queda bajo el tramo exento del impuesto único (13,5 UTM), así que no pagan impuesto. En un mes con variables el impuesto se calcula sobre el total del mes, no por ítem, y baja el líquido real. Se usaron AFP 10,58 % y salud 7 %; otra AFP o una isapre cambian estas columnas. Fórmulas verificadas contra 12 liquidaciones (oct-2025 a sep-2026) con diferencia de $0, con la UTM oficial del SII de cada mes.</p>
 <p class="sub">La gratificación ($219.115) es el tope del contrato (cláusula II: 4,75 ingresos mínimos ÷ 12) con el ingreso mínimo de $553.553 vigente desde mayo de 2026; los $209.396 y $213.354 anteriores calzan con los mínimos de $529.000 y $539.000. Sube cuando sube el ingreso mínimo (desde 2027 se reajusta por IPC, Ley 21.830).</p>
 
 <h2>2 · Variables, pagados por unidad</h2>
-<div style="overflow-x:auto"><table>
+<div class="tbl"><table>
 <thead><tr><th>Ítem</th><th class="n">Bruto</th><th class="n">AFP+salud+ces. (18,18 %)</th><th class="n">Impuesto (4 %)</th><th class="n">Líquido</th><th>Unidad</th><th>Nota</th></tr></thead><tbody>
-<tr><td class="item">TAD (turno de alistamiento), día de semana</td><td class="n">$5.000</td><td class="n">$909</td><td class="n">$164</td><td class="n"><b>$3.927</b></td><td>por turno</td><td class="note"></td></tr>
-<tr><td class="item">TAD, fin de semana y festivo</td><td class="n">$8.000</td><td class="n">$1.454</td><td class="n">$262</td><td class="n"><b>$6.284</b></td><td>por turno</td><td class="note"></td></tr>
-<tr><td class="item">Hora extra</td><td class="n">$5.000</td><td class="n">$909</td><td class="n">$164</td><td class="n"><b>$3.927</b></td><td>por hora</td><td class="note">En revisión: la ley (art. 32 Código del Trabajo) fija un recargo del 50 % sobre el sueldo convenido, y esa base podría dar más de $5.000</td></tr>
-<tr><td class="item">Traslado</td><td class="n">$5.000</td><td class="n">$909</td><td class="n">$164</td><td class="n"><b>$3.927</b></td><td>por hora</td><td class="note">Se pagaba como hora extra</td></tr>
-<tr><td class="item">Bono compensatorio feriado <span class="sv">sin validar</span></td><td class="n">$32.025</td><td class="n">$5.822</td><td class="n">$1.048</td><td class="n"><b>$25.155</b></td><td>por feriado trabajado</td><td class="note">Valor del último mes, varía levemente entre liquidaciones. Las liquidaciones no separan feriado de domingo: ambos se muestran con el mismo valor por unidad (sin confirmar que sean iguales)</td></tr>
-<tr><td class="item">Bono compensatorio domingo <span class="sv">sin validar</span></td><td class="n">$32.025</td><td class="n">$5.822</td><td class="n">$1.048</td><td class="n"><b>$25.155</b></td><td>por domingo trabajado</td><td class="note">Mismo valor por unidad que el de feriado en las liquidaciones; sin confirmar que coincidan</td></tr>
-<tr><td class="item">Bono minero y bono caballos <span class="sv">sin validar</span></td><td class="n">$12.000</td><td class="n">$2.182</td><td class="n">$392</td><td class="n"><b>$9.426</b></td><td>por «Sub» o «Mul»</td><td class="note">Un solo ítem y un solo valor para todas las mineras que se visitan: el bono caballos se paga dentro del bono minero y en las liquidaciones figura como «Bono Minero»</td></tr>
-<tr><td class="item">Bono colación <span class="sv">sin validar</span></td><td class="n">$5.000</td><td class="n">$909</td><td class="n">$164</td><td class="n"><b>$3.927</b></td><td>por unidad</td><td class="note">Se paga por tramos de horas extra. Día hábil: al completar 4, 8 y 12 horas (12 horas = $15.000). Día inhábil: al completar 8, 12 y 16 horas (12 horas = $10.000). Regla informada verbalmente, sin documento</td></tr>
+<tr><td class="item" data-label="Ítem">TAD (turno de alistamiento), día de semana</td><td class="n" data-label="Bruto">$5.000</td><td class="n" data-label="AFP+salud+ces. (18,18 %)">$909</td><td class="n" data-label="Impuesto (4 %)">$164</td><td class="n" data-label="Líquido"><b>$3.927</b></td><td data-label="Unidad">por turno</td><td class="note" data-label="Nota"></td></tr>
+<tr><td class="item" data-label="Ítem">TAD, fin de semana y festivo</td><td class="n" data-label="Bruto">$8.000</td><td class="n" data-label="AFP+salud+ces. (18,18 %)">$1.454</td><td class="n" data-label="Impuesto (4 %)">$262</td><td class="n" data-label="Líquido"><b>$6.284</b></td><td data-label="Unidad">por turno</td><td class="note" data-label="Nota"></td></tr>
+<tr><td class="item" data-label="Ítem">Hora extra</td><td class="n" data-label="Bruto">$5.000</td><td class="n" data-label="AFP+salud+ces. (18,18 %)">$909</td><td class="n" data-label="Impuesto (4 %)">$164</td><td class="n" data-label="Líquido"><b>$3.927</b></td><td data-label="Unidad">por hora</td><td class="note" data-label="Nota">En revisión: la ley (art. 32 Código del Trabajo) fija un recargo del 50 % sobre el sueldo convenido, y esa base podría dar más de $5.000</td></tr>
+<tr><td class="item" data-label="Ítem">Traslado</td><td class="n" data-label="Bruto">$5.000</td><td class="n" data-label="AFP+salud+ces. (18,18 %)">$909</td><td class="n" data-label="Impuesto (4 %)">$164</td><td class="n" data-label="Líquido"><b>$3.927</b></td><td data-label="Unidad">por hora</td><td class="note" data-label="Nota">Se pagaba como hora extra</td></tr>
+<tr><td class="item" data-label="Ítem">Bono compensatorio feriado <span class="sv">sin validar</span></td><td class="n" data-label="Bruto">$32.025</td><td class="n" data-label="AFP+salud+ces. (18,18 %)">$5.822</td><td class="n" data-label="Impuesto (4 %)">$1.048</td><td class="n" data-label="Líquido"><b>$25.155</b></td><td data-label="Unidad">por feriado trabajado</td><td class="note" data-label="Nota">Valor del último mes, varía levemente entre liquidaciones. Las liquidaciones no separan feriado de domingo: ambos se muestran con el mismo valor por unidad (sin confirmar que sean iguales)</td></tr>
+<tr><td class="item" data-label="Ítem">Bono compensatorio domingo <span class="sv">sin validar</span></td><td class="n" data-label="Bruto">$32.025</td><td class="n" data-label="AFP+salud+ces. (18,18 %)">$5.822</td><td class="n" data-label="Impuesto (4 %)">$1.048</td><td class="n" data-label="Líquido"><b>$25.155</b></td><td data-label="Unidad">por domingo trabajado</td><td class="note" data-label="Nota">Mismo valor por unidad que el de feriado en las liquidaciones; sin confirmar que coincidan</td></tr>
+<tr><td class="item" data-label="Ítem">Bono minero y bono caballos <span class="sv">sin validar</span></td><td class="n" data-label="Bruto">$12.000</td><td class="n" data-label="AFP+salud+ces. (18,18 %)">$2.182</td><td class="n" data-label="Impuesto (4 %)">$392</td><td class="n" data-label="Líquido"><b>$9.426</b></td><td data-label="Unidad">por «Sub» o «Mul»</td><td class="note" data-label="Nota">Un solo ítem y un solo valor para todas las mineras que se visitan: el bono caballos se paga dentro del bono minero y en las liquidaciones figura como «Bono Minero»</td></tr>
+<tr><td class="item" data-label="Ítem">Bono colación <span class="sv">sin validar</span></td><td class="n" data-label="Bruto">$5.000</td><td class="n" data-label="AFP+salud+ces. (18,18 %)">$909</td><td class="n" data-label="Impuesto (4 %)">$164</td><td class="n" data-label="Líquido"><b>$3.927</b></td><td data-label="Unidad">por unidad</td><td class="note" data-label="Nota">Se paga por tramos de horas extra. Día hábil: al completar 4, 8 y 12 horas (12 horas = $15.000). Día inhábil: al completar 8, 12 y 16 horas (12 horas = $10.000). Regla informada verbalmente, sin documento</td></tr>
 </tbody></table></div>
 
 <h2>3 · Esporádicos</h2>
-<div style="overflow-x:auto"><table>
+<div class="tbl"><table>
 <thead><tr><th>Ítem</th><th class="n">Bruto</th><th class="n">AFP+salud+ces. (18,18 %)</th><th class="n">Impuesto (4 %)</th><th class="n">Líquido</th><th>Unidad</th><th>Nota</th></tr></thead><tbody>
-<tr><td class="item">Bono camioneta</td><td class="n">$125.000</td><td class="n">$22.725</td><td class="n">$4.091</td><td class="n"><b>$98.184</b></td><td>cada vez que se paga</td><td class="note">Promedia $41.667 al mes. Si la nueva empresa no entrega camioneta, pedir su equivalente</td></tr>
-<tr><td class="item">Bono tutor <span class="sv">sin validar</span></td><td class="n">$100.000</td><td class="n">$18.180</td><td class="n">$3.273</td><td class="n"><b>$78.547</b></td><td>cada vez que se paga</td><td class="note"></td></tr>
-<tr><td class="item">Aguinaldo</td><td class="n">$318.282</td><td class="n">$57.864</td><td class="n">$10.416</td><td class="n"><b>$250.002</b></td><td>cada vez que se paga</td><td class="note"></td></tr>
+<tr><td class="item" data-label="Ítem">Bono camioneta</td><td class="n" data-label="Bruto">$125.000</td><td class="n" data-label="AFP+salud+ces. (18,18 %)">$22.725</td><td class="n" data-label="Impuesto (4 %)">$4.091</td><td class="n" data-label="Líquido"><b>$98.184</b></td><td data-label="Unidad">cada vez que se paga</td><td class="note" data-label="Nota">Promedia $41.667 al mes. Si la nueva empresa no entrega camioneta, pedir su equivalente</td></tr>
+<tr><td class="item" data-label="Ítem">Bono tutor <span class="sv">sin validar</span></td><td class="n" data-label="Bruto">$100.000</td><td class="n" data-label="AFP+salud+ces. (18,18 %)">$18.180</td><td class="n" data-label="Impuesto (4 %)">$3.273</td><td class="n" data-label="Líquido"><b>$78.547</b></td><td data-label="Unidad">cada vez que se paga</td><td class="note" data-label="Nota"></td></tr>
+<tr><td class="item" data-label="Ítem">Aguinaldo</td><td class="n" data-label="Bruto">$318.282</td><td class="n" data-label="AFP+salud+ces. (18,18 %)">$57.864</td><td class="n" data-label="Impuesto (4 %)">$10.416</td><td class="n" data-label="Líquido"><b>$250.002</b></td><td data-label="Unidad">cada vez que se paga</td><td class="note" data-label="Nota"></td></tr>
 </tbody></table></div>
 
 <p class="sub">Todos son imponibles. Cada monto tributa con el 4 % marginal del impuesto único, que es el tramo en que cayó cada uno de los 12 meses; el líquido por peso bruto es 0.7855. Los montos van redondeados al peso: en la liquidación los descuentos se redondean sobre el total del mes. Como los fijos dejan sin usar parte del tramo exento, cada mes suma además unos $6.500 a $8.100 de líquido (4 % de lo que falta para 13,5 UTM). Con esto, fijos + variables reproduce el líquido de cada liquidación de oct-2025 a sep-2026 con diferencia menor a $1.</p>
