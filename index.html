@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Tabla de referencia de pagos</title>
+<title>Propuesta de remuneración</title>
 <style>
   :root { --fg:#1c1e21; --mute:#5b6168; --line:#d5d9de; --head:#eef1f4; --acc:#0b5cab; --warn:#fff6e0; --bg:#fff; }
   @media (prefers-color-scheme: dark) {
@@ -51,65 +51,80 @@
   @media print { body { padding:0; font-size:12px; } h2 { margin-top:16px; } tr { break-inside:avoid; } }
 </style>
 </head>
+<!-- generado por scripts/propuesta_telrad.py: no editar a mano -->
 <body>
 <main>
 
-<h1>Tabla de referencia de pagos · técnico terreno Entel V Región</h1>
-<p class="sub">Valores que pagó la empresa actual entre oct-2025 y sep-2026, en <b>pesos brutos</b>. Sirve de piso para pedir a la nueva empresa. Actualizada el 22-10-2026.</p>
+<h1>Propuesta de remuneración · técnico terreno Entel V Región</h1>
+<p class="sub">Lo que paga hoy la empresa actual (promedio de oct-2025 a sep-2026) y lo que se propone para la nueva empresa, en <b>pesos brutos</b>. Actualizada el 29-10-2026.</p>
 
 <div class="box">
-  <b>Cómo leerla.</b> Todos los montos son brutos. El líquido cambia según AFP, salud e impuesto de cada persona, por eso no va.
-  «Imponible» significa que descuenta AFP, salud y cesantía; «no imponible» llega íntegro.<br>
-  <span class="sv" style="margin-left:0">sin validar</span> = el monto sale de las liquidaciones, pero su unidad o su uso todavía no está confirmado. Si a alguien le pagaron distinto, o lo entiende de otra forma, conviene avisarlo.
+  <b>Cómo leerla.</b> Los montos son brutos; el líquido de la propuesta es aproximado y cambia según la AFP y la isapre de cada persona (se usó AFP 10,58 %, salud 7 %, cesantía 0,6 % e impuesto único). «Imponible» descuenta AFP, salud y cesantía; «no imponible» llega íntegro.
 </div>
+
+<h2>Resumen · un mes típico</h2>
+<div class="tbl"><table>
+<thead><tr><th>Concepto</th><th class="n">Unidades al mes</th><th class="n">Hoy</th><th class="n">Propuesta</th></tr></thead><tbody>
+<tr><td class="item" data-label="Concepto">Fijos del mes</td><td class="n" data-label="Unidades al mes"></td><td class="n" data-label="Hoy">$983.715</td><td class="n" data-label="Propuesta">$1.203.715</td></tr>
+<tr><td class="item" data-label="Concepto">Hora extra y traslado</td><td class="n" data-label="Unidades al mes">64</td><td class="n" data-label="Hoy">$320.651</td><td class="n" data-label="Propuesta">$374.072</td></tr>
+<tr><td class="item" data-label="Concepto">TAD, lunes a viernes</td><td class="n" data-label="Unidades al mes">9,7</td><td class="n" data-label="Hoy">$48.333</td><td class="n" data-label="Propuesta">$48.333</td></tr>
+<tr><td class="item" data-label="Concepto">TAD, sábado, domingo y festivo</td><td class="n" data-label="Unidades al mes">4,8</td><td class="n" data-label="Hoy">$38.667</td><td class="n" data-label="Propuesta">$38.667</td></tr>
+<tr><td class="item" data-label="Concepto">Bono compensatorio (feriados y domingos)</td><td class="n" data-label="Unidades al mes">3,0</td><td class="n" data-label="Hoy">$96.075</td><td class="n" data-label="Propuesta">$96.075</td></tr>
+<tr><td class="item" data-label="Concepto">Bono minero y caballos</td><td class="n" data-label="Unidades al mes">3,5</td><td class="n" data-label="Hoy">$42.000</td><td class="n" data-label="Propuesta">$42.000</td></tr>
+<tr><td class="item" data-label="Concepto">Bono colación</td><td class="n" data-label="Unidades al mes">4,1</td><td class="n" data-label="Hoy">$20.417</td><td class="n" data-label="Propuesta">$32.667</td></tr>
+<tr><td class="item" data-label="Concepto">Bono camioneta (prorrateado)</td><td class="n" data-label="Unidades al mes"></td><td class="n" data-label="Hoy">$41.667</td><td class="n" data-label="Propuesta">$41.667</td></tr>
+<tr><td class="item" data-label="Concepto">Aguinaldo (prorrateado)</td><td class="n" data-label="Unidades al mes"></td><td class="n" data-label="Hoy">$53.047</td><td class="n" data-label="Propuesta">$53.047</td></tr>
+<tr class="tot"><td class="item" data-label="Concepto">Total bruto</td><td class="n" data-label="Unidades al mes"></td><td class="n" data-label="Hoy"><b>$1.644.572</b></td><td class="n" data-label="Propuesta"><b>$1.930.243</b></td></tr>
+<tr class="tot"><td class="item" data-label="Concepto">Total líquido aprox.</td><td class="n" data-label="Unidades al mes"></td><td class="n" data-label="Hoy"><b>$1.339.308</b></td><td class="n" data-label="Propuesta"><b>$1.567.985</b></td></tr>
+</tbody></table></div>
+<p class="sub">Es un mes promedio: las unidades son las de los 12 meses (oct-2025 a sep-2026) y se valoran con los precios de cada columna; el bono camioneta y el aguinaldo van prorrateados. Los fijos pasan de 60 % a 62 % del ingreso. No incluye viático, semana corrida ni la colación extra no imponible.</p>
 
 <h2>1 · Fijos mensuales</h2>
 <div class="tbl"><table>
-<thead><tr><th>Ítem</th><th class="n">Bruto</th><th class="n">AFP 10,58 %</th><th class="n">Salud 7 %</th><th class="n">Cesantía 0,6 %</th><th class="n">Líquido</th><th>Tipo</th></tr></thead><tbody>
-<tr><td class="item" data-label="Ítem">Sueldo base</td><td class="n" data-label="Bruto">$600.000</td><td class="n" data-label="AFP 10,58 %">$63.480</td><td class="n" data-label="Salud 7 %">$42.000</td><td class="n" data-label="Cesantía 0,6 %">$3.599</td><td class="n" data-label="Líquido"><b>$490.921</b></td><td data-label="Tipo">imponible</td></tr>
-<tr><td class="item" data-label="Ítem">Gratificación</td><td class="n" data-label="Bruto">$219.115</td><td class="n" data-label="AFP 10,58 %">$23.182</td><td class="n" data-label="Salud 7 %">$15.338</td><td class="n" data-label="Cesantía 0,6 %">$1.315</td><td class="n" data-label="Líquido"><b>$179.280</b></td><td data-label="Tipo">imponible</td></tr>
-<tr><td class="item" data-label="Ítem">Asignación de responsabilidad</td><td class="n" data-label="Bruto">$100.000</td><td class="n" data-label="AFP 10,58 %">$10.580</td><td class="n" data-label="Salud 7 %">$7.000</td><td class="n" data-label="Cesantía 0,6 %">$600</td><td class="n" data-label="Líquido"><b>$81.820</b></td><td data-label="Tipo">imponible</td></tr>
-<tr><td class="item" data-label="Ítem">Bono hidratación</td><td class="n" data-label="Bruto">$24.600</td><td class="n" data-label="AFP 10,58 %">$2.603</td><td class="n" data-label="Salud 7 %">$1.722</td><td class="n" data-label="Cesantía 0,6 %">$148</td><td class="n" data-label="Líquido"><b>$20.127</b></td><td data-label="Tipo">imponible</td></tr>
-<tr><td class="item" data-label="Ítem">Colación</td><td class="n" data-label="Bruto">$40.000</td><td class="n" data-label="AFP 10,58 %">–</td><td class="n" data-label="Salud 7 %">–</td><td class="n" data-label="Cesantía 0,6 %">–</td><td class="n" data-label="Líquido"><b>$40.000</b></td><td data-label="Tipo">no imponible</td></tr>
-<tr class="tot"><td class="item" data-label="Ítem">Total fijos</td><td class="n" data-label="Bruto"><b>$983.715</b></td><td class="n" data-label="AFP 10,58 %"><b>$99.845</b></td><td class="n" data-label="Salud 7 %"><b>$66.060</b></td><td class="n" data-label="Cesantía 0,6 %"><b>$5.662</b></td><td class="n" data-label="Líquido"><b>$812.148</b></td><td data-label="Tipo"></td></tr>
+<thead><tr><th>Ítem</th><th class="n">Hoy</th><th class="n">Propuesta</th><th class="n">Líquido propuesta</th><th>Tipo</th></tr></thead><tbody>
+<tr><td class="item" data-label="Ítem">Sueldo base</td><td class="n" data-label="Hoy">$600.000</td><td class="n" data-label="Propuesta"><b>$700.000</b></td><td class="n" data-label="Líquido propuesta"><b>$572.741</b></td><td class="" data-label="Tipo">imponible</td></tr>
+<tr><td class="item" data-label="Ítem">Gratificación</td><td class="n" data-label="Hoy">$219.115</td><td class="n" data-label="Propuesta">$219.115</td><td class="n" data-label="Líquido propuesta"><b>$179.280</b></td><td class="" data-label="Tipo">imponible</td></tr>
+<tr><td class="item" data-label="Ítem">Asignación de responsabilidad</td><td class="n" data-label="Hoy">$100.000</td><td class="n" data-label="Propuesta"><b>$200.000</b></td><td class="n" data-label="Líquido propuesta"><b>$163.640</b></td><td class="" data-label="Tipo">imponible</td></tr>
+<tr><td class="item" data-label="Ítem">Bono hidratación</td><td class="n" data-label="Hoy">$24.600</td><td class="n" data-label="Propuesta">$24.600</td><td class="n" data-label="Líquido propuesta"><b>$20.127</b></td><td class="" data-label="Tipo">imponible</td></tr>
+<tr><td class="item" data-label="Ítem">Colación</td><td class="n" data-label="Hoy">$40.000</td><td class="n" data-label="Propuesta"><b>$60.000</b></td><td class="n" data-label="Líquido propuesta"><b>$60.000</b></td><td class="" data-label="Tipo">no imponible</td></tr>
+<tr class="tot"><td class="item" data-label="Ítem">Total fijos</td><td class="n" data-label="Hoy"><b>$983.715</b></td><td class="n" data-label="Propuesta"><b>$1.203.715</b></td><td class="n" data-label="Líquido propuesta"><b>$995.788</b></td><td></td></tr>
 </tbody></table></div>
-<p class="sub">Los fijos suman $943.715 imponibles; tras AFP, salud y cesantía quedan $772.148, que equivale a 10.7 UTM y queda bajo el tramo exento del impuesto único (13,5 UTM), así que no pagan impuesto. En un mes con variables el impuesto se calcula sobre el total del mes, no por ítem, y baja el líquido real. Se usaron AFP 10,58 % y salud 7 %; otra AFP o una isapre cambian estas columnas. Fórmulas verificadas contra 12 liquidaciones (oct-2025 a sep-2026) con diferencia de $0, con la UTM oficial del SII de cada mes.</p>
-<p class="sub">La gratificación ($219.115) es el tope del contrato (cláusula II: 4,75 ingresos mínimos ÷ 12) con el ingreso mínimo de $553.553 vigente desde mayo de 2026; los $209.396 y $213.354 anteriores calzan con los mínimos de $529.000 y $539.000. Sube cuando sube el ingreso mínimo (desde 2027 se reajusta por IPC, Ley 21.830).</p>
+<p class="sub">Los fijos imponibles de la propuesta suman $1.143.715; tras AFP, salud y cesantía quedan $935.788, que equivalen a 13.0 UTM y quedan bajo el tramo exento del impuesto único (13,5 UTM): no pagan impuesto. En un mes con pagos variables el impuesto se calcula sobre el total del mes y baja el líquido.</p>
+<p class="sub">La gratificación ($219.115) es el tope legal (4,75 ingresos mínimos ÷ 12, con el ingreso mínimo de $553.553 vigente desde mayo de 2026) y sube cuando sube el ingreso mínimo. Se pide escrita en el contrato con la modalidad del art. 50.</p>
 
 <h2>2 · Variables, pagados por unidad</h2>
 <div class="tbl"><table>
-<thead><tr><th>Ítem</th><th class="n">Bruto</th><th class="n">AFP+salud+ces. (18,18 %)</th><th class="n">Impuesto (4 %)</th><th class="n">Líquido</th><th>Unidad</th><th>Nota</th></tr></thead><tbody>
-<tr><td class="item" data-label="Ítem">TAD (turno de alistamiento), día de semana</td><td class="n" data-label="Bruto">$5.000</td><td class="n" data-label="AFP+salud+ces. (18,18 %)">$909</td><td class="n" data-label="Impuesto (4 %)">$164</td><td class="n" data-label="Líquido"><b>$3.927</b></td><td data-label="Unidad">por turno</td><td class="note" data-label="Nota"></td></tr>
-<tr><td class="item" data-label="Ítem">TAD, fin de semana y festivo</td><td class="n" data-label="Bruto">$8.000</td><td class="n" data-label="AFP+salud+ces. (18,18 %)">$1.454</td><td class="n" data-label="Impuesto (4 %)">$262</td><td class="n" data-label="Líquido"><b>$6.284</b></td><td data-label="Unidad">por turno</td><td class="note" data-label="Nota"></td></tr>
-<tr><td class="item" data-label="Ítem">Hora extra</td><td class="n" data-label="Bruto">$5.000</td><td class="n" data-label="AFP+salud+ces. (18,18 %)">$909</td><td class="n" data-label="Impuesto (4 %)">$164</td><td class="n" data-label="Líquido"><b>$3.927</b></td><td data-label="Unidad">por hora</td><td class="note" data-label="Nota">En revisión: la ley (art. 32 Código del Trabajo) fija un recargo del 50 % sobre el sueldo convenido, y esa base podría dar más de $5.000</td></tr>
-<tr><td class="item" data-label="Ítem">Traslado</td><td class="n" data-label="Bruto">$5.000</td><td class="n" data-label="AFP+salud+ces. (18,18 %)">$909</td><td class="n" data-label="Impuesto (4 %)">$164</td><td class="n" data-label="Líquido"><b>$3.927</b></td><td data-label="Unidad">por hora</td><td class="note" data-label="Nota">Se pagaba como hora extra</td></tr>
-<tr><td class="item" data-label="Ítem">Bono compensatorio feriado <span class="sv">sin validar</span></td><td class="n" data-label="Bruto">$32.025</td><td class="n" data-label="AFP+salud+ces. (18,18 %)">$5.822</td><td class="n" data-label="Impuesto (4 %)">$1.048</td><td class="n" data-label="Líquido"><b>$25.155</b></td><td data-label="Unidad">por feriado trabajado</td><td class="note" data-label="Nota">Valor del último mes, varía levemente entre liquidaciones. Las liquidaciones no separan feriado de domingo: ambos se muestran con el mismo valor por unidad (sin confirmar que sean iguales)</td></tr>
-<tr><td class="item" data-label="Ítem">Bono compensatorio domingo <span class="sv">sin validar</span></td><td class="n" data-label="Bruto">$32.025</td><td class="n" data-label="AFP+salud+ces. (18,18 %)">$5.822</td><td class="n" data-label="Impuesto (4 %)">$1.048</td><td class="n" data-label="Líquido"><b>$25.155</b></td><td data-label="Unidad">por domingo trabajado</td><td class="note" data-label="Nota">Mismo valor por unidad que el de feriado en las liquidaciones; sin confirmar que coincidan</td></tr>
-<tr><td class="item" data-label="Ítem">Bono minero y bono caballos <span class="sv">sin validar</span></td><td class="n" data-label="Bruto">$12.000</td><td class="n" data-label="AFP+salud+ces. (18,18 %)">$2.182</td><td class="n" data-label="Impuesto (4 %)">$392</td><td class="n" data-label="Líquido"><b>$9.426</b></td><td data-label="Unidad">por «Sub» o «Mul»</td><td class="note" data-label="Nota">Un solo ítem y un solo valor para todas las mineras que se visitan: el bono caballos se paga dentro del bono minero y en las liquidaciones figura como «Bono Minero»</td></tr>
-<tr><td class="item" data-label="Ítem">Bono colación <span class="sv">sin validar</span></td><td class="n" data-label="Bruto">$5.000</td><td class="n" data-label="AFP+salud+ces. (18,18 %)">$909</td><td class="n" data-label="Impuesto (4 %)">$164</td><td class="n" data-label="Líquido"><b>$3.927</b></td><td data-label="Unidad">por unidad</td><td class="note" data-label="Nota">Se paga por tramos de horas extra. Día hábil: al completar 4, 8 y 12 horas (12 horas = $15.000). Día inhábil: al completar 8, 12 y 16 horas (12 horas = $10.000). Regla informada verbalmente, sin documento</td></tr>
+<thead><tr><th>Ítem</th><th class="n">Hoy</th><th class="n">Propuesta</th><th class="n">Líquido propuesta</th><th>Unidad</th><th>Nota</th></tr></thead><tbody>
+<tr><td class="item" data-label="Ítem">TAD (turno de alistamiento), lunes a viernes</td><td class="n" data-label="Hoy">$5.000</td><td class="n" data-label="Propuesta">$5.000</td><td class="n" data-label="Líquido propuesta"><b>$3.927</b></td><td class="" data-label="Unidad">por turno</td><td class="note" data-label="Nota">Se mantiene el valor.</td></tr>
+<tr><td class="item" data-label="Ítem">TAD, sábado, domingo y festivo</td><td class="n" data-label="Hoy">$8.000</td><td class="n" data-label="Propuesta">$8.000</td><td class="n" data-label="Líquido propuesta"><b>$6.284</b></td><td class="" data-label="Unidad">por turno</td><td class="note" data-label="Nota">Se mantiene el valor.</td></tr>
+<tr><td class="item" data-label="Ítem">Hora extra</td><td class="n" data-label="Hoy">$5.000</td><td class="n" data-label="Propuesta"><b>$5.833</b></td><td class="n" data-label="Líquido propuesta"><b>$4.582</b></td><td class="" data-label="Unidad">por hora</td><td class="note" data-label="Nota">Sueldo base × 7 ÷ 1.260 × 1,5 (art. 32 Código del Trabajo). Sube porque sube el sueldo base.</td></tr>
+<tr><td class="item" data-label="Ítem">Traslado</td><td class="n" data-label="Hoy">$5.000</td><td class="n" data-label="Propuesta"><b>$5.833</b></td><td class="n" data-label="Líquido propuesta"><b>$4.582</b></td><td class="" data-label="Unidad">por hora</td><td class="note" data-label="Nota">Se paga igual que la hora extra.</td></tr>
+<tr><td class="item" data-label="Ítem">Bono compensatorio feriado</td><td class="n" data-label="Hoy">$32.025</td><td class="n" data-label="Propuesta">$32.025</td><td class="n" data-label="Líquido propuesta"><b>$25.155</b></td><td class="" data-label="Unidad">por feriado trabajado</td><td class="note" data-label="Nota">Se mantiene el valor.</td></tr>
+<tr><td class="item" data-label="Ítem">Bono compensatorio domingo</td><td class="n" data-label="Hoy">$32.025</td><td class="n" data-label="Propuesta">$32.025</td><td class="n" data-label="Líquido propuesta"><b>$25.155</b></td><td class="" data-label="Unidad">por domingo trabajado</td><td class="note" data-label="Nota">Se mantiene el valor.</td></tr>
+<tr><td class="item" data-label="Ítem">Bono minero y bono caballos</td><td class="n" data-label="Hoy">$12.000</td><td class="n" data-label="Propuesta">$12.000</td><td class="n" data-label="Líquido propuesta"><b>$9.426</b></td><td class="" data-label="Unidad">por visita (una por minera)</td><td class="note" data-label="Nota">Un solo valor para todas las mineras que se visitan.</td></tr>
+<tr><td class="item" data-label="Ítem">Bono colación (imponible)</td><td class="n" data-label="Hoy">$5.000</td><td class="n" data-label="Propuesta"><b>$8.000</b></td><td class="n" data-label="Líquido propuesta"><b>$6.284</b></td><td class="" data-label="Unidad">por tramo cumplido</td><td class="note" data-label="Nota">Se paga por tramos de horas extra. Día hábil: al completar 4, 8 y 12 horas. Día inhábil: al completar 8, 12 y 16 horas.</td></tr>
 </tbody></table></div>
-
 <h2>3 · Esporádicos</h2>
 <div class="tbl"><table>
-<thead><tr><th>Ítem</th><th class="n">Bruto</th><th class="n">AFP+salud+ces. (18,18 %)</th><th class="n">Impuesto (4 %)</th><th class="n">Líquido</th><th>Unidad</th><th>Nota</th></tr></thead><tbody>
-<tr><td class="item" data-label="Ítem">Bono camioneta</td><td class="n" data-label="Bruto">$125.000</td><td class="n" data-label="AFP+salud+ces. (18,18 %)">$22.725</td><td class="n" data-label="Impuesto (4 %)">$4.091</td><td class="n" data-label="Líquido"><b>$98.184</b></td><td data-label="Unidad">cada vez que se paga</td><td class="note" data-label="Nota">Promedia $41.667 al mes. Si la nueva empresa no entrega camioneta, pedir su equivalente</td></tr>
-<tr><td class="item" data-label="Ítem">Bono tutor <span class="sv">sin validar</span></td><td class="n" data-label="Bruto">$100.000</td><td class="n" data-label="AFP+salud+ces. (18,18 %)">$18.180</td><td class="n" data-label="Impuesto (4 %)">$3.273</td><td class="n" data-label="Líquido"><b>$78.547</b></td><td data-label="Unidad">cada vez que se paga</td><td class="note" data-label="Nota"></td></tr>
-<tr><td class="item" data-label="Ítem">Aguinaldo</td><td class="n" data-label="Bruto">$318.282</td><td class="n" data-label="AFP+salud+ces. (18,18 %)">$57.864</td><td class="n" data-label="Impuesto (4 %)">$10.416</td><td class="n" data-label="Líquido"><b>$250.002</b></td><td data-label="Unidad">cada vez que se paga</td><td class="note" data-label="Nota"></td></tr>
+<thead><tr><th>Ítem</th><th class="n">Hoy</th><th class="n">Propuesta</th><th class="n">Líquido propuesta</th><th>Unidad</th><th>Nota</th></tr></thead><tbody>
+<tr><td class="item" data-label="Ítem">Bono camioneta</td><td class="n" data-label="Hoy">$125.000</td><td class="n" data-label="Propuesta">$125.000</td><td class="n" data-label="Líquido propuesta"><b>$98.184</b></td><td class="" data-label="Unidad">4 veces al año</td><td class="note" data-label="Nota">Hoy se paga sin periodicidad escrita. Se pide fijarla en 4 pagos al año (promedia $41.667 al mes).</td></tr>
+<tr><td class="item" data-label="Ítem">Aguinaldo</td><td class="n" data-label="Hoy">$318.282</td><td class="n" data-label="Propuesta">$318.282</td><td class="n" data-label="Líquido propuesta"><b>$250.002</b></td><td class="" data-label="Unidad">2 veces al año</td><td class="note" data-label="Nota">Se pide dejarlo escrito en el contrato.</td></tr>
 </tbody></table></div>
+<p class="sub">Todos son imponibles y tributan con el 4 % marginal del impuesto único (líquido por peso bruto: 0.7855). Los montos van redondeados al peso.</p>
 
-<p class="sub">Todos son imponibles. Cada monto tributa con el 4 % marginal del impuesto único, que es el tramo en que cayó cada uno de los 12 meses; el líquido por peso bruto es 0.7855. Los montos van redondeados al peso: en la liquidación los descuentos se redondean sobre el total del mes. Como los fijos dejan sin usar parte del tramo exento, cada mes suma además unos $6.500 a $8.100 de líquido (4 % de lo que falta para 13,5 UTM). Con esto, fijos + variables reproduce el líquido de cada liquidación de oct-2025 a sep-2026 con diferencia menor a $1.</p>
-
-<h2>4 · A fijar por escrito con la nueva empresa</h2>
+<h2>4 · A fijar por escrito</h2>
 <ul>
   <li><b>Mínimo garantizado</b> de turnos y horas, o los valores por unidad de arriba escritos en el contrato: lo variable depende de cuántos turnos y horas haya.</li>
-  <li><b>Sin límite de horas extra</b>: que se paguen todas las horas trabajadas y aprobadas, sin tope mensual ni por tipo. En algunas liquidaciones actuales un ítem de hora extra aparece en exactamente 40 horas.</li>
-  <li><b>Viático</b> fuera de la V Región (comida y alojamiento): monto por día. No hay valor documentado; se negocia.</li>
-  <li><b>Fondo fijo para gastos operacionales</b>: hoy se asigna $150.000, que se rinde, para peajes, combustible y los demás gastos diarios de la operación. Además, para gastos grandes se asignan <b>fondos especiales</b>: arriero de caballos, compra de materiales en sitios vandalizados, mantenciones de la camioneta en la zona y acceso a sitios donde se debe pagar a propietarios. Pedir por escrito que se mantengan, para no adelantar esos gastos de bolsillo. <span class="sv">sin validar</span></li>
-  <li><b>Cupón Copec</b>: hoy se carga todos los días un cupón Copec para su uso (combustible). No aparece en las liquidaciones; pedir por escrito que se mantenga la carga diaria. <span class="sv">sin validar</span></li>
-  <li><b>Alimentación en faena Codelco</b>: hoy, al ir a esa minera, se tiene desayuno, almuerzo y cena, más 3 «chocas» diarias (bolsas de comida express). No tiene valor en las liquidaciones; pedir por escrito que se mantenga o su equivalente en dinero. Esto lo gestiona Miguel Rivera con el gerente de operaciones de la contratista. <span class="sv">sin validar</span></li>
-  <li><b>Bono contingencia</b>: Entel informó que lo paga; la empresa lo paga y luego se lo cobra a Entel. Pedir por escrito que se mantenga. No está en esta tabla.</li>
+  <li><b>Sin límite de horas extra</b>: que se paguen todas las horas trabajadas y aprobadas, sin tope mensual ni por tipo.</li>
+  <li><b>Base de cálculo de la hora extra</b>: sueldo base más asignación de responsabilidad. Con $700.000 + $200.000 la hora queda en $7.500.</li>
+  <li><b>Semana corrida (art. 45 del Código del Trabajo)</b>: el pago de domingos y festivos con el promedio de la parte variable (TAD y bonos por unidad), calculado cada mes, o un monto fijo mensual equivalente.</li>
+  <li><b>Reajuste anual</b>: el 1 de enero, del sueldo base y la asignación de responsabilidad por el IPC de los 12 meses anteriores (INE); los valores por unidad, en la misma fecha.</li>
+  <li><b>Viático</b> fuera de la V Región (comida y alojamiento): $38.000 por día.</li>
+  <li><b>Fondo fijo para gastos operacionales</b>: hoy se asigna $150.000, que se rinde, para peajes, combustible y los demás gastos diarios de la operación. Además, para gastos grandes se asignan <b>fondos especiales</b>: arriero de caballos, compra de materiales en sitios vandalizados, mantenciones de la camioneta en la zona y acceso a sitios donde se debe pagar a propietarios. Se pide mantenerlos, para no adelantar esos gastos de bolsillo.</li>
+  <li><b>Cupón Copec</b>: hoy se carga todos los días un cupón Copec para su uso (combustible). Se pide mantener la carga diaria.</li>
+  <li><b>Alimentación en faena Codelco</b>: hoy, al ir a esa minera, se tiene desayuno, almuerzo y cena, más 3 «chocas» diarias (bolsas de comida express). Se pide mantenerla o su equivalente en dinero.</li>
   <li><b>Reconocimiento de antigüedad</b> al pasar de empresa (no pasa sola).</li>
-  <li>Quién entrega y mantiene <b>camioneta, EPP y herramientas</b>, y que no se cobren al trabajador.</li>
+  <li><b>Camioneta, EPP y herramientas</b>: quién los entrega y mantiene, y que no se cobren al trabajador.</li>
 </ul>
 
 <footer>
