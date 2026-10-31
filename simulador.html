@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Simulador de remuneración</title>
+<style>
+  :root { --fg:#1c1e21; --mute:#5b6168; --line:#d5d9de; --head:#eef1f4; --acc:#0b5cab; --warn:#fff6e0; --bg:#fff; --card:#fff; --ok:#0a7d3b; --bad:#b3261e; }
+  @media (prefers-color-scheme: dark) {
+    :root { --fg:#e6e8eb; --mute:#a2a9b1; --line:#3a4047; --head:#262b31; --acc:#6aaeff; --warn:#3a3220; --bg:#16191d; --card:#1b1f24; --ok:#4cc38a; --bad:#ff8a80; }
+  }
+  * { box-sizing:border-box; }
+  html { -webkit-text-size-adjust:100%; text-size-adjust:100%; }
+  body { margin:0; padding:20px max(16px, env(safe-area-inset-right)) 40px max(16px, env(safe-area-inset-left)); font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif; color:var(--fg); background:var(--bg); overflow-wrap:break-word; }
+  main { max-width:1100px; margin:0 auto; }
+  h1 { font-size:1.4rem; line-height:1.25; margin:0 0 6px; }
+  h2 { font-size:1.1rem; margin:30px 0 10px; color:var(--acc); }
+  h3 { font-size:.95rem; margin:0 0 6px; }
+  a { color:var(--acc); }
+  p.sub { margin:0 0 12px; color:var(--mute); max-width:75ch; }
+  .box { background:var(--warn); border:1px solid var(--line); border-radius:6px; padding:10px 12px; margin:14px 0; font-size:.94rem; max-width:75ch; }
+  .cards { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:12px 14px; }
+  .card .big { font-size:1.6rem; font-weight:700; font-variant-numeric:tabular-nums; margin:2px 0; }
+  .card .k { color:var(--mute); font-size:.85rem; }
+  .card .row { display:flex; justify-content:space-between; gap:10px; font-size:.92rem; padding:2px 0; font-variant-numeric:tabular-nums; }
+  .card button { margin-top:8px; }
+  .pos { color:var(--ok); font-weight:600; } .neg { color:var(--bad); font-weight:600; }
+  button, select, input { font:inherit; color:var(--fg); background:var(--card); border:1px solid var(--line); border-radius:7px; padding:6px 10px; }
+  button { cursor:pointer; } button.on { background:var(--acc); color:#fff; border-color:var(--acc); }
+  .seg { display:inline-flex; flex-wrap:wrap; gap:6px; margin:0 0 10px; }
+  .ctl { display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:10px 14px; margin:8px 0 12px; }
+  .ctl label { display:flex; flex-direction:column; gap:3px; font-size:.82rem; color:var(--mute); }
+  .ctl label b { color:var(--fg); font-weight:600; font-size:.9rem; }
+  .ctl input[type=number], .ctl input[type=text], .ctl select { width:100%; }
+  .ctl input[type=range] { padding:0; width:100%; }
+  .chk { flex-direction:row !important; align-items:center; gap:8px !important; color:var(--fg) !important; font-size:.95rem !important; }
+  .chk input { width:auto; }
+  details { margin:6px 0 12px; } summary { cursor:pointer; color:var(--acc); }
+  .liqs { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .liq { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:12px 14px; }
+  .liq h3 { text-transform:uppercase; letter-spacing:.04em; border-bottom:2px solid var(--fg); padding-bottom:6px; }
+  .liq h4 { margin:10px 0 2px; font-size:.75rem; text-transform:uppercase; color:var(--mute); letter-spacing:.05em; }
+  .liq table { margin:0; } .liq td { padding:3px 0; border:0; }
+  .liq td.q { color:var(--mute); font-size:.8rem; padding-left:8px; }
+  .liq tr.sub td { border-top:1px solid var(--line); font-weight:600; padding-top:4px; }
+  .liq tr.fin td { border-top:2px solid var(--fg); font-size:1.15rem; font-weight:700; padding-top:6px; }
+  .nota { color:var(--mute); font-size:.85rem; margin:6px 0 0; }
+  .tb { overflow-x:auto; -webkit-overflow-scrolling:touch; }
+  table { width:100%; border-collapse:collapse; margin:0 0 4px; }
+  th, td { text-align:left; padding:6px 8px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { background:var(--head); font-size:.76rem; text-transform:uppercase; letter-spacing:.03em; white-space:nowrap; }
+  td.n, th.n { text-align:right; white-space:nowrap; font-variant-numeric:tabular-nums; }
+  .map td.n { cursor:pointer; } .map td.n:hover { outline:2px solid var(--acc); outline-offset:-2px; }
+  ul { margin:6px 0 0 18px; padding:0; max-width:80ch; } li { margin:0 0 6px; }
+  footer { margin-top:28px; color:var(--mute); font-size:.85rem; max-width:75ch; }
+  @media (max-width:860px) { .cards, .liqs { grid-template-columns:1fr; } }
+  @media print { body { padding:0; font-size:12px; } .liq, .card { break-inside:avoid; } }
+</style>
+</head>
+<body>
+<main>
+<h1>Simulador de remuneración · técnico terreno Entel V Región</h1>
+<p class="sub">Complemento de la <a href="index.html">tabla de la propuesta</a>. Muestra cuánto se puede ganar al mes y
+al año, del mínimo al máximo, y permite probar cualquier combinación de turnos, horas extra y bonos. Los montos de la
+propuesta salen de la misma tabla. Actualizado el 30-10-2026.</p>
+<div class="box"><b>Es un modelo, no una liquidación.</b> Las cantidades futuras son supuestos y el líquido cambia con la
+AFP, la isapre y los turnos de cada persona. Se usó la UTM de octubre de 2026 y el impuesto único del SII, calculado mes
+a mes. Referencia para conversar, no asesoría legal.</div>
+
+<h2>1 · Mínimo, típico y máximo</h2>
+<div class="cards" id="cards"></div>
+<p class="nota">Año: 12 meses calculados uno a uno, con aguinaldo en diciembre y septiembre y camioneta en diciembre,
+marzo, junio y septiembre. El máximo es un techo teórico (todo en un mismo mes, con bonos que hoy no tienen historial):
+no se ha visto un mes así. «Típico» es el mes promedio de la tabla.</p>
+
+<h2>2 · Calculadora</h2>
+<div class="seg" id="perfiles"></div>
+<div class="ctl" id="campos"></div>
+<details><summary>Ajustes personales (AFP y salud)</summary>
+  <div class="ctl">
+    <label><b>AFP, % del imponible</b><input type="text" inputmode="decimal" id="afp"></label>
+    <label><b>Salud, % del imponible</b><input type="text" inputmode="decimal" id="salud"></label>
+  </div>
+  <p class="nota">La cesantía es 0,6 %. Con una isapre que cobra más del 7 %, el líquido baja.</p>
+</details>
+<div class="liqs" id="liqs"></div>
+<p id="dif" class="nota"></p>
+<h3 style="margin-top:14px">Cada unidad más, en la propuesta, deja aproximadamente:</h3>
+<div class="tb"><table id="marg"></table></div>
+<p class="nota">Es la diferencia real de líquido al sumar una unidad en el mes que se está simulando; el impuesto puede cambiar de tramo.</p>
+
+<h2>3 · Mapa de escenarios</h2>
+<div class="seg" id="mapa_mes"></div>
+<div class="seg" id="mapa_ver"></div>
+<div class="tb"><table class="map" id="mapa"></table></div>
+<p class="nota">Líquido mensual según la carga de turnos (filas) y las horas extra (columnas). La colación se calcula
+sola según las horas. Un clic en una celda la carga en la calculadora.</p>
+
+<h2>4 · Qué no incluye</h2>
+<ul>
+  <li>Semana corrida, feriado con el promedio de las variables, la colación extra no imponible y el bono de contingencia (sin regla escrita).</li>
+  <li>Licencias médicas: en un mes con licencia la asignación de responsabilidad y la colación se pagarían por los días trabajados (ver la sección 4 de la tabla); el mínimo sería menor.</li>
+  <li>El reajuste anual y la UTM de otros meses. El bono colación se estima por las horas extra, a menos que se ingrese a mano.</li>
+  <li>El tope imponible de las cotizaciones, que a estos montos no se alcanza.</li>
+</ul>
+<footer>Fuente: liquidaciones de sueldo de oct-2025 a sep-2026 y la propuesta de la tabla. Referencia para conversar, no
+asesoría legal: ante dudas, consultar a un abogado o a la Inspección del Trabajo.</footer>
+</main>
+<script>
+const D={"fijos": [[["Sueldo base", 600000, 1], ["Gratificación", 219115, 1], ["Asignación de responsabilidad", 100000, 1], ["Bono hidratación", 24600, 1], ["Colación", 40000, 0]], [["Sueldo base", 720000, 1], ["Gratificación", 219115, 1], ["Asignación de responsabilidad", 130000, 1], ["Bono hidratación", 24600, 1], ["Colación", 50000, 0]]], "precio": {"he": [5000, 6000], "tad": [5000, 5000], "tad_fds": [8000, 8000], "comp": [32025, 38195], "minero": [12000, 19100], "col": [5000, 8000], "vand": [0, 25465], "tutor": [100000, 127315], "viat": [null, 38000], "cam": [125000, 127315], "cump": [0, 127315], "agui": [318282, 318282]}, "ratio_col": 0.06367253432604957, "utm": 72151, "tramos": [[13.5, 0, 0], [30, 0.04, 0.54], [50, 0.08, 1.74], [70, 0.135, 4.49], [90, 0.23, 11.14], [120, 0.304, 17.8], [310, 0.35, 23.32], [1000000000.0, 0.4, 38.82]], "afp": 0.1058, "salud": 0.07, "ces": 0.006, "cargas": {"sin": {"tad": 0, "tadf": 0, "comp": 0, "min": 0}, "baja": {"tad": 5, "tadf": 0, "comp": 2, "min": 0}, "promedio": {"tad": 10, "tadf": 5, "comp": 3, "min": 4}, "alta": {"tad": 10, "tadf": 8, "comp": 5, "min": 4}, "maxima": {"tad": 12, "tadf": 10, "comp": 5, "min": 7}}, "esc": {"min": {"base": {"h": 0, "col": 0, "tad": 0, "tadf": 0, "comp": 0, "min": 0, "vand": 0, "tut": 0, "via": 0, "cum": 0}, "mes": {"cam": 0, "agui": 0}}, "tip": {"base": {"h": 64.13021527341296, "col": 4.083333333333333, "tad": 9.666666666666666, "tadf": 4.833333333333333, "comp": 3.0, "min": 3.5, "vand": 0, "tut": 0, "via": 0, "cum": 0}, "mes": {"cam": 0.3333333333333333, "agui": 0.16666666666666666}}, "max": {"base": {"h": 100, "col": 10, "tad": 12, "tadf": 10, "comp": 5, "min": 7, "vand": 1, "tut": 1, "via": 0, "cum": 100}, "mes": {"cam": 1, "agui": 1}}}, "cal": [{"n": "Diciembre", "cam": 1, "agui": 1}, {"n": "Enero", "cam": 0, "agui": 0}, {"n": "Febrero", "cam": 0, "agui": 0}, {"n": "Marzo", "cam": 1, "agui": 0}, {"n": "Abril", "cam": 0, "agui": 0}, {"n": "Mayo", "cam": 0, "agui": 0}, {"n": "Junio", "cam": 1, "agui": 0}, {"n": "Julio", "cam": 0, "agui": 0}, {"n": "Agosto", "cam": 0, "agui": 0}, {"n": "Septiembre", "cam": 1, "agui": 1}, {"n": "Octubre", "cam": 0, "agui": 0}, {"n": "Noviembre", "cam": 0, "agui": 0}], "horas_max": 100, "fecha": "30-10-2026"};
+const R=x=>Math.floor(x+0.5);
+const fmtN=n=>String(Math.round(Math.abs(n))).replace(/\B(?=(\d{3})+(?!\d))/g,'.');
+const peso=n=>(n<0?'-$':'$')+fmtN(n);
+const cant=n=>Number.isInteger(n)?String(n):String(Math.round(n*10)/10).replace('.',',');
+
+function impuesto(base,utm){
+  const u=base/utm;
+  for(const t of D.tramos){if(u<=t[0])return {valor:Math.max(0,R(base*t[1]-t[2]*utm)),tasa:t[1]};}
+  return {valor:0,tasa:0};
+}
+const ITEMS=[['he','Horas extra y traslado','h'],['tad','TAD, lunes a viernes','tad'],
+  ['tad_fds','TAD, sábado, domingo y festivo','tadf'],['comp','Bono compensatorio','comp'],
+  ['minero','Bono minero y caballos','min'],['col','Bono colación (imponible)','col'],
+  ['vand','Bono por reponer sitios vandalizados','vand'],['tutor','Bono tutor','tut']];
+
+function calcular(P,lado,aj){
+  const pr=k=>D.precio[k][lado];
+  const imp=[],noimp=[],nopaga=[];
+  D.fijos[lado].forEach(f=>(f[2]?imp:noimp).push([f[0],'','',f[1]]));
+  const col=P.col==null?R(P.h*D.ratio_col):P.col;
+  ITEMS.forEach(it=>{
+    const c=it[2]==='col'?col:P[it[2]],p=pr(it[0]);
+    if(!(c>0))return;
+    if(!p){nopaga.push(it[1]);return;}
+    imp.push([it[1],cant(c),p,R(c*p)]);
+  });
+  if(P.cum>0){const p=pr('cump');
+    if(!p)nopaga.push('Bono de cumplimiento');
+    else imp.push(['Bono de cumplimiento ('+P.cum+' %)','',p,R(p*P.cum/100)]);}
+  if(P.cam>0){const p=pr('cam');imp.push(['Bono camioneta',cant(P.cam),p,R(P.cam*p)]);}
+  if(P.agui>0){const p=pr('agui');imp.push(['Aguinaldo',cant(P.agui),p,R(P.agui*p)]);}
+  if(P.via>0){const p=pr('viat');
+    if(p==null)nopaga.push('Viático fuera de la V Región (hoy: sin confirmar)');
+    else noimp.push(['Viático fuera de la V Región',cant(P.via),p,R(P.via*p)]);}
+  const sum=l=>l.reduce((a,x)=>a+x[3],0);
+  const iT=sum(imp),nT=sum(noimp);
+  const afp=R(iT*aj.afp),salud=R(iT*aj.salud),ces=R(iT*aj.ces);
+  const base=iT-afp-salud-ces,im=impuesto(base,D.utm);
+  return {imp_l:imp,noimp_l:noimp,nopaga:nopaga,imp:iT,noimp:nT,bruto:iT+nT,afp:afp,salud:salud,ces:ces,
+    base:base,impuesto:im.valor,tasa:im.tasa,liquido:iT+nT-afp-salud-ces-im.valor};
+}
+const AJ0={afp:D.afp,salud:D.salud,ces:D.ces};
+function conMes(e,cam,agui){return Object.assign({},e.base,{cam:cam,agui:agui});}
+function mesEsc(e,lado,aj){return calcular(conMes(e,e.mes.cam,e.mes.agui),lado,aj);}
+function anio(e,extras,lado,aj){
+  let t=0;D.cal.forEach(m=>{t+=calcular(conMes(e,extras&&m.cam?1:0,extras&&m.agui?1:0),lado,aj).liquido;});
+  return t;
+}
+function paramCarga(nombre,h,cam,agui){return Object.assign({h:h,col:null,vand:0,tut:0,via:0,cum:0,cam:cam,agui:agui},D.cargas[nombre]);}
+const HORAS_MAPA=[0,10,20,30,40,50,60,70,80,90,100];
+const PERFILES=[['sin','Sin turnos'],['baja','Baja'],['promedio','Promedio'],['alta','Alta'],['maxima','Máxima']];
+function mapa(lado,cam,agui,aj){
+  return PERFILES.map(p=>HORAS_MAPA.map(h=>calcular(paramCarga(p[0],h,cam,agui),lado,aj).liquido));
+}
+
+if(typeof document!=='undefined'){
+const $=id=>document.getElementById(id);
+const CAMPOS=[['h','Horas extra y traslado al mes','he'],['col','Tramos de colación imponible (vacío = automático)','col'],
+  ['tad','TAD, lunes a viernes (turnos)','tad'],['tadf','TAD, sábado, domingo y festivo (turnos)','tad_fds'],
+  ['comp','Compensatorios: feriados y domingos trabajados','comp'],['min','Visitas mineras (minero y caballos)','minero'],
+  ['vand','Sitios vandalizados repuestos','vand'],['tut','Colegas nuevos capacitados (tutor)','tutor'],
+  ['via','Días de viático fuera de la V Región','viat']];
+let S={h:64,col:null,tad:10,tadf:5,comp:3,min:4,vand:0,tut:0,via:0,cam:0,agui:0,cum:0};
+let AJ={afp:D.afp,salud:D.salud,ces:D.ces};
+let MAPA_MES=0,MAPA_VER=0;
+
+function leerHash(){
+  try{
+    const q=new URLSearchParams(location.hash.slice(1));
+    Object.keys(S).forEach(k=>{if(q.has(k)){const v=q.get(k);S[k]=(k==='col'&&v==='')?null:Math.max(0,Number(v)||0);}});
+    if(q.has('afp'))AJ.afp=Math.max(0,Number(q.get('afp'))||0)/100;
+    if(q.has('salud'))AJ.salud=Math.max(0,Number(q.get('salud'))||0)/100;
+  }catch(e){}
+}
+function guardarHash(){
+  try{
+    const q=new URLSearchParams();
+    Object.keys(S).forEach(k=>q.set(k,S[k]==null?'':S[k]));
+    q.set('afp',(AJ.afp*100).toFixed(2));q.set('salud',(AJ.salud*100).toFixed(2));
+    history.replaceState(null,'','#'+q.toString());
+  }catch(e){}
+}
+const pct=x=>(Math.round(x*10000)/100).toString().replace('.',',');
+const num=s=>Number(String(s).replace(',','.'))||0;
+
+function filas(l){return l.map(x=>'<tr><td>'+x[0]+'</td><td class="q">'+(x[1]?x[1]+(x[2]?' × '+peso(x[2]):''):'')+'</td><td class="n">'+peso(x[3])+'</td></tr>').join('');}
+function liq(d,titulo){
+  const nota=d.nopaga.length?'<p class="nota">No se paga hoy o sin confirmar: '+d.nopaga.join(', ')+'.</p>':'';
+  return '<h3>'+titulo+'</h3><h4>Haberes imponibles</h4><table>'+filas(d.imp_l)+'<tr class="sub"><td colspan="2">Total imponible</td><td class="n">'+peso(d.imp)+'</td></tr></table>'
+   +(d.noimp_l.length?'<h4>Haberes no imponibles</h4><table>'+filas(d.noimp_l)+'</table>':'')
+   +'<table><tr class="sub"><td colspan="2">Total haberes</td><td class="n">'+peso(d.bruto)+'</td></tr></table>'
+   +'<h4>Descuentos</h4><table><tr><td>AFP '+pct(AJ.afp)+' %</td><td class="q"></td><td class="n">'+peso(d.afp)+'</td></tr>'
+   +'<tr><td>Salud '+pct(AJ.salud)+' %</td><td class="q"></td><td class="n">'+peso(d.salud)+'</td></tr>'
+   +'<tr><td>Seguro de cesantía 0,6 %</td><td class="q"></td><td class="n">'+peso(d.ces)+'</td></tr>'
+   +'<tr><td>Impuesto único</td><td class="q">base '+peso(d.base)+' · tramo '+pct(d.tasa)+' %</td><td class="n">'+peso(d.impuesto)+'</td></tr>'
+   +'<tr class="fin"><td colspan="2">Líquido a pagar</td><td class="n">'+peso(d.liquido)+'</td></tr></table>'+nota;
+}
+function dif(a,b){const d=a-b;return '<span class="'+(d>=0?'pos':'neg')+'">'+(d>=0?'+':'-')+peso(Math.abs(d))+'</span>';}
+
+const TARJ=[['min','Mínimo','Solo los fijos del mes, sin horas extra, turnos ni bonos.'],
+  ['tip','Típico','El mes promedio de la tabla (promedio de 12 meses).'],
+  ['max','Máximo','100 horas extra, la mayor carga de turnos, cumplimiento al 100 %, un tutor y un sitio vandalizado, con camioneta y aguinaldo.']];
+function tarjetas(){
+  $('cards').innerHTML=TARJ.map(t=>{
+    const e=D.esc[t[0]],p=mesEsc(e,1,AJ0),h=mesEsc(e,0,AJ0);
+    const ap=anio(e,true,1,AJ0),ah=anio(e,true,0,AJ0),sp_=anio(e,false,1,AJ0),sh=anio(e,false,0,AJ0);
+    return '<div class="card"><h3>'+t[1]+'</h3><div class="k">'+t[2]+'</div>'
+     +'<div class="k">Líquido de un mes · propuesta</div><div class="big">'+peso(p.liquido)+'</div>'
+     +'<div class="row"><span>Hoy</span><span>'+peso(h.liquido)+'</span></div>'
+     +'<div class="row"><span>Diferencia</span><span>'+dif(p.liquido,h.liquido)+'</span></div>'
+     +'<div class="k" style="margin-top:8px">Líquido de 12 meses · propuesta</div><div class="big">'+peso(ap)+'</div>'
+     +'<div class="row"><span>Hoy</span><span>'+peso(ah)+'</span></div>'
+     +'<div class="row"><span>Diferencia</span><span>'+dif(ap,ah)+'</span></div>'
+     +'<div class="row"><span>Sin camioneta ni aguinaldo</span><span>'+peso(sp_)+'</span></div>'
+     +'<div class="row"><span>Hoy, sin ellos</span><span>'+peso(sh)+'</span></div>'
+     +'<button data-esc="'+t[0]+'">Cargar en la calculadora</button></div>';
+  }).join('');
+  document.querySelectorAll('[data-esc]').forEach(b=>b.onclick=()=>{
+    const e=D.esc[b.dataset.esc],o=e.base;
+    S={h:R(o.h),col:R(o.col),tad:R(o.tad),tadf:R(o.tadf),comp:R(o.comp),min:R(o.min),vand:o.vand,tut:o.tut,via:0,
+       cum:o.cum,cam:e.mes.cam>=1?1:0,agui:e.mes.agui>=1?1:0};
+    sincronizar();render();$('campos').scrollIntoView({behavior:'smooth'});
+  });
+}
+
+function armarCampos(){
+  $('perfiles').innerHTML='<span class="k" style="align-self:center;color:var(--mute)">Carga de turnos:</span>'
+    +PERFILES.map(p=>'<button data-perfil="'+p[0]+'">'+p[1]+'</button>').join('');
+  document.querySelectorAll('[data-perfil]').forEach(b=>b.onclick=()=>{
+    const c=D.cargas[b.dataset.perfil];S.tad=c.tad;S.tadf=c.tadf;S.comp=c.comp;S.min=c.min;sincronizar();render();});
+  let h=CAMPOS.map(c=>{
+    const p=D.precio[c[2]][1];
+    const extra=c[0]==='h'?'<input type="range" id="r_h" min="0" max="'+D.horas_max+'" step="1">':'';
+    return '<label><b>'+c[1]+'</b><span>propuesta '+peso(p)+' por unidad</span>'
+      +'<input type="number" min="0" step="any" inputmode="decimal" id="c_'+c[0]+'">'+extra+'</label>';
+  }).join('');
+  h+='<label class="chk"><input type="checkbox" id="c_cam"> Bono camioneta este mes ('+peso(D.precio.cam[1])+')</label>'
+    +'<label class="chk"><input type="checkbox" id="c_agui"> Aguinaldo este mes ('+peso(D.precio.agui[1])+')</label>'
+    +'<label><b>Bono de cumplimiento</b><span>máximo '+peso(D.precio.cump[1])+' (hoy no se paga)</span><select id="c_cum">'
+    +[0,70,80,100].map(v=>'<option value="'+v+'">'+(v?v+' %':'No se paga')+'</option>').join('')+'</select></label>';
+  $('campos').innerHTML=h;
+  CAMPOS.forEach(c=>{
+    $('c_'+c[0]).addEventListener('input',e=>{
+      const v=e.target.value;
+      S[c[0]]=(c[0]==='col'&&v==='')?null:Math.max(0,num(v));
+      if(c[0]==='h')$('r_h').value=S.h;
+      render();});
+  });
+  $('r_h').addEventListener('input',e=>{S.h=Number(e.target.value);$('c_h').value=S.h;render();});
+  $('c_cam').addEventListener('change',e=>{S.cam=e.target.checked?1:0;render();});
+  $('c_agui').addEventListener('change',e=>{S.agui=e.target.checked?1:0;render();});
+  $('c_cum').addEventListener('change',e=>{S.cum=Number(e.target.value);render();});
+  $('afp').addEventListener('input',e=>{AJ.afp=num(e.target.value)/100;render();});
+  $('salud').addEventListener('input',e=>{AJ.salud=num(e.target.value)/100;render();});
+}
+function sincronizar(){
+  CAMPOS.forEach(c=>{$('c_'+c[0]).value=S[c[0]]==null?'':S[c[0]];});
+  $('r_h').value=Math.min(S.h,D.horas_max);
+  $('c_cam').checked=S.cam>0;$('c_agui').checked=S.agui>0;$('c_cum').value=String(S.cum);
+  $('afp').value=pct(AJ.afp);$('salud').value=pct(AJ.salud);
+}
+
+const MARG=[['h','Hora extra o de traslado'],['col','Tramo de colación'],['tad','Turno TAD de semana'],['tadf','Turno TAD de fin de semana'],
+  ['comp','Compensatorio'],['min','Visita minera'],['vand','Sitio vandalizado'],['tut','Colega capacitado (tutor)']];
+function render(){
+  const auto=R(S.h*D.ratio_col);
+  $('c_col').placeholder='automático: '+auto;
+  const p=calcular(S,1,AJ),h=calcular(S,0,AJ);
+  $('liqs').innerHTML='<div class="liq">'+liq(p,'Propuesta')+'</div><div class="liq">'+liq(h,'Hoy (valores actuales)')+'</div>';
+  $('dif').innerHTML='Diferencia de líquido en este mes: '+dif(p.liquido,h.liquido)+'.';
+  $('marg').innerHTML='<tr><th>Ítem</th><th class="n">Líquido por unidad más</th></tr>'+MARG.map(m=>{
+    const q=Object.assign({},S);q[m[0]]=(S[m[0]]==null?auto:S[m[0]])+1;
+    return '<tr><td>'+m[1]+'</td><td class="n">'+dif(calcular(q,1,AJ).liquido,p.liquido)+'</td></tr>';}).join('');
+  guardarHash();
+  dibujarMapa();
+}
+
+function armarMapa(){
+  $('mapa_mes').innerHTML=['Mes normal','Con camioneta','Con aguinaldo y camioneta'].map((t,i)=>'<button data-mm="'+i+'">'+t+'</button>').join('');
+  $('mapa_ver').innerHTML=['Líquido de la propuesta','Diferencia contra hoy'].map((t,i)=>'<button data-mv="'+i+'">'+t+'</button>').join('');
+  document.querySelectorAll('[data-mm]').forEach(b=>b.onclick=()=>{MAPA_MES=Number(b.dataset.mm);dibujarMapa();});
+  document.querySelectorAll('[data-mv]').forEach(b=>b.onclick=()=>{MAPA_VER=Number(b.dataset.mv);dibujarMapa();});
+}
+function dibujarMapa(){
+  document.querySelectorAll('[data-mm]').forEach(b=>b.classList.toggle('on',Number(b.dataset.mm)===MAPA_MES));
+  document.querySelectorAll('[data-mv]').forEach(b=>b.classList.toggle('on',Number(b.dataset.mv)===MAPA_VER));
+  const cam=MAPA_MES>=1?1:0,agui=MAPA_MES===2?1:0;
+  const a=mapa(1,cam,agui,AJ),b=mapa(0,cam,agui,AJ);
+  const v=a.map((f,i)=>f.map((x,j)=>MAPA_VER?x-b[i][j]:x));
+  const flat=[].concat.apply([],v),mn=Math.min.apply(null,flat),mx=Math.max.apply(null,flat);
+  let t='<tr><th>Carga / horas extra</th>'+HORAS_MAPA.map(h=>'<th class="n">'+h+'</th>').join('')+'</tr>';
+  v.forEach((f,i)=>{t+='<tr><td><b>'+PERFILES[i][1]+'</b><br><small>'+D.cargas[PERFILES[i][0]].tad+'+'+D.cargas[PERFILES[i][0]].tadf+' TAD · '
+    +D.cargas[PERFILES[i][0]].comp+' comp. · '+D.cargas[PERFILES[i][0]].min+' mineros</small></td>'
+    +f.map((x,j)=>'<td class="n" data-p="'+i+'" data-h="'+HORAS_MAPA[j]+'" style="background:color-mix(in srgb,var(--acc) '+Math.round(6+34*(x-mn)/((mx-mn)||1))+'%,transparent)">'+peso(x)+'</td>').join('')+'</tr>';});
+  $('mapa').innerHTML=t;
+  document.querySelectorAll('td[data-p]').forEach(c=>c.onclick=()=>{
+    const pf=D.cargas[PERFILES[Number(c.dataset.p)][0]];
+    S.tad=pf.tad;S.tadf=pf.tadf;S.comp=pf.comp;S.min=pf.min;S.h=Number(c.dataset.h);S.col=null;S.vand=0;S.tut=0;S.via=0;S.cum=0;
+    S.cam=cam;S.agui=agui;sincronizar();render();$('campos').scrollIntoView({behavior:'smooth'});});
+}
+
+leerHash();armarCampos();armarMapa();tarjetas();sincronizar();render();
+}
+</script>
+</body>
+</html>
