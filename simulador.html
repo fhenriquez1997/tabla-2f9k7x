@@ -63,10 +63,11 @@
 <h1>Simulador de remuneración · técnico terreno Entel V Región</h1>
 <p class="sub">Complemento de la <a href="index.html">tabla de la propuesta</a>. Muestra cuánto se puede ganar al mes y
 al año, del mínimo al máximo, y permite probar cualquier combinación de turnos, horas extra y bonos. Los montos de la
-propuesta salen de la misma tabla. Actualizado el 31-10-2026.</p>
+propuesta salen de la misma tabla. Actualizado el 01-11-2026.</p>
 <div class="box"><b>Es un modelo, no una liquidación.</b> Las cantidades futuras son supuestos y el líquido cambia con la
 AFP, la isapre y los turnos de cada persona. Se usó la UTM de octubre de 2026 y el impuesto único del SII, calculado mes
 a mes. Referencia para conversar, no asesoría legal.</div>
+<div class="box"><b>Bruto y líquido.</b> <b>Bruto</b> es lo que figura en la liquidación antes de los descuentos; <b>líquido</b> es lo que llega a la cuenta. Los valores por unidad, los haberes y los totales de haberes son brutos; las tarjetas de arriba, el mapa de escenarios y el «líquido a pagar» son líquidos. Cada cifra dice cuál es.
 
 <h2>1 · Mínimo, típico y máximo</h2>
 <div class="cards" id="cards"></div>
@@ -108,7 +109,7 @@ sola según las horas. Un clic en una celda la carga en la calculadora.</p>
 asesoría legal: ante dudas, consultar a un abogado o a la Inspección del Trabajo.</footer>
 </main>
 <script>
-const D={"fijos": [[["Sueldo base", 600000, 1], ["Gratificación", 219115, 1], ["Asignación de responsabilidad", 100000, 1], ["Bono hidratación", 24600, 1], ["Colación", 40000, 0]], [["Sueldo base", 770000, 1], ["Gratificación", 219115, 1], ["Asignación de responsabilidad", 100000, 1], ["Bono hidratación", 24600, 1], ["Colación", 50000, 0]]], "precio": {"he": [5000, 6417], "tad": [5000, 5000], "tad_fds": [8000, 8000], "comp": [32025, 38195], "minero": [12000, 15000], "col": [5000, 5000], "vand": [0, 25465], "tutor": [100000, 127315], "viat": [null, 38000], "cam": [125000, 127315], "cump": [0, 127315], "agui": [318282, 318282]}, "ratio_col": 0.06367253432604957, "utm": 72151, "tramos": [[13.5, 0, 0], [30, 0.04, 0.54], [50, 0.08, 1.74], [70, 0.135, 4.49], [90, 0.23, 11.14], [120, 0.304, 17.8], [310, 0.35, 23.32], [1000000000.0, 0.4, 38.82]], "afp": 0.1058, "salud": 0.07, "ces": 0.006, "cargas": {"sin": {"tad": 0, "tadf": 0, "comp": 0, "min": 0}, "baja": {"tad": 5, "tadf": 0, "comp": 2, "min": 0}, "promedio": {"tad": 10, "tadf": 5, "comp": 3, "min": 4}, "alta": {"tad": 10, "tadf": 8, "comp": 5, "min": 4}, "maxima": {"tad": 12, "tadf": 10, "comp": 5, "min": 7}}, "esc": {"min": {"base": {"h": 0, "col": 0, "tad": 0, "tadf": 0, "comp": 0, "min": 0, "vand": 0, "tut": 0, "via": 0, "cum": 0}, "mes": {"cam": 0, "agui": 0}}, "tip": {"base": {"h": 64.13021527341296, "col": 4.083333333333333, "tad": 9.666666666666666, "tadf": 4.833333333333333, "comp": 3.0, "min": 3.5, "vand": 0, "tut": 0, "via": 0, "cum": 0}, "mes": {"cam": 0.3333333333333333, "agui": 0.16666666666666666}}, "max": {"base": {"h": 100, "col": 10, "tad": 12, "tadf": 10, "comp": 5, "min": 7, "vand": 1, "tut": 1, "via": 0, "cum": 100}, "mes": {"cam": 1, "agui": 1}}}, "cal": [{"n": "Diciembre", "cam": 1, "agui": 1}, {"n": "Enero", "cam": 0, "agui": 0}, {"n": "Febrero", "cam": 0, "agui": 0}, {"n": "Marzo", "cam": 1, "agui": 0}, {"n": "Abril", "cam": 0, "agui": 0}, {"n": "Mayo", "cam": 0, "agui": 0}, {"n": "Junio", "cam": 1, "agui": 0}, {"n": "Julio", "cam": 0, "agui": 0}, {"n": "Agosto", "cam": 0, "agui": 0}, {"n": "Septiembre", "cam": 1, "agui": 1}, {"n": "Octubre", "cam": 0, "agui": 0}, {"n": "Noviembre", "cam": 0, "agui": 0}], "horas_max": 100, "fecha": "31-10-2026"};
+const D={"fijos": [[["Sueldo base", 600000, 1], ["Gratificación", 219115, 1], ["Asignación de responsabilidad", 100000, 1], ["Bono hidratación", 24600, 1], ["Colación", 40000, 0]], [["Sueldo base", 770000, 1], ["Gratificación", 219115, 1], ["Asignación de responsabilidad", 100000, 1], ["Bono hidratación", 24600, 1], ["Colación", 50000, 0]]], "precio": {"he": [5000, 6417], "tad": [5000, 5000], "tad_fds": [8000, 8000], "comp": [32025, 38195], "minero": [12000, 15000], "col": [5000, 5000], "vand": [0, 25465], "tutor": [100000, 127315], "viat": [null, 38000], "cam": [125000, 127315], "cump": [0, 127315], "agui": [318282, 318282]}, "ratio_col": 0.06367253432604957, "utm": 72151, "tramos": [[13.5, 0, 0], [30, 0.04, 0.54], [50, 0.08, 1.74], [70, 0.135, 4.49], [90, 0.23, 11.14], [120, 0.304, 17.8], [310, 0.35, 23.32], [1000000000.0, 0.4, 38.82]], "afp": 0.1058, "salud": 0.07, "ces": 0.006, "cargas": {"sin": {"tad": 0, "tadf": 0, "comp": 0, "min": 0}, "baja": {"tad": 5, "tadf": 0, "comp": 2, "min": 0}, "promedio": {"tad": 10, "tadf": 5, "comp": 3, "min": 4}, "alta": {"tad": 10, "tadf": 8, "comp": 5, "min": 4}, "maxima": {"tad": 12, "tadf": 10, "comp": 5, "min": 7}}, "esc": {"min": {"base": {"h": 0, "col": 0, "tad": 0, "tadf": 0, "comp": 0, "min": 0, "vand": 0, "tut": 0, "via": 0, "cum": 0}, "mes": {"cam": 0, "agui": 0}}, "tip": {"base": {"h": 64.13021527341296, "col": 4.083333333333333, "tad": 9.666666666666666, "tadf": 4.833333333333333, "comp": 3.0, "min": 3.5, "vand": 0, "tut": 0, "via": 0, "cum": 0}, "mes": {"cam": 0.3333333333333333, "agui": 0.16666666666666666}}, "max": {"base": {"h": 100, "col": 10, "tad": 12, "tadf": 10, "comp": 5, "min": 7, "vand": 1, "tut": 1, "via": 0, "cum": 100}, "mes": {"cam": 1, "agui": 1}}}, "cal": [{"n": "Diciembre", "cam": 1, "agui": 1}, {"n": "Enero", "cam": 0, "agui": 0}, {"n": "Febrero", "cam": 0, "agui": 0}, {"n": "Marzo", "cam": 1, "agui": 0}, {"n": "Abril", "cam": 0, "agui": 0}, {"n": "Mayo", "cam": 0, "agui": 0}, {"n": "Junio", "cam": 1, "agui": 0}, {"n": "Julio", "cam": 0, "agui": 0}, {"n": "Agosto", "cam": 0, "agui": 0}, {"n": "Septiembre", "cam": 1, "agui": 1}, {"n": "Octubre", "cam": 0, "agui": 0}, {"n": "Noviembre", "cam": 0, "agui": 0}], "horas_max": 100, "fecha": "01-11-2026"};
 const R=x=>Math.floor(x+0.5);
 const fmtN=n=>String(Math.round(Math.abs(n))).replace(/\B(?=(\d{3})+(?!\d))/g,'.');
 const peso=n=>(n<0?'-$':'$')+fmtN(n);
@@ -197,14 +198,14 @@ const num=s=>Number(String(s).replace(',','.'))||0;
 function filas(l){return l.map(x=>'<tr><td>'+x[0]+'</td><td class="q">'+(x[1]?x[1]+(x[2]?' × '+peso(x[2]):''):'')+'</td><td class="n">'+peso(x[3])+'</td></tr>').join('');}
 function liq(d,titulo){
   const nota=d.nopaga.length?'<p class="nota">No se paga hoy o sin confirmar: '+d.nopaga.join(', ')+'.</p>':'';
-  return '<h3>'+titulo+'</h3><h4>Haberes imponibles</h4><table>'+filas(d.imp_l)+'<tr class="sub"><td colspan="2">Total imponible</td><td class="n">'+peso(d.imp)+'</td></tr></table>'
-   +(d.noimp_l.length?'<h4>Haberes no imponibles</h4><table>'+filas(d.noimp_l)+'</table>':'')
-   +'<table><tr class="sub"><td colspan="2">Total haberes</td><td class="n">'+peso(d.bruto)+'</td></tr></table>'
+  return '<h3>'+titulo+'</h3><h4>Haberes imponibles (bruto)</h4><table>'+filas(d.imp_l)+'<tr class="sub"><td colspan="2">Total imponible (bruto)</td><td class="n">'+peso(d.imp)+'</td></tr></table>'
+   +(d.noimp_l.length?'<h4>Haberes no imponibles (bruto)</h4><table>'+filas(d.noimp_l)+'</table>':'')
+   +'<table><tr class="sub"><td colspan="2">Total haberes (BRUTO)</td><td class="n">'+peso(d.bruto)+'</td></tr></table>'
    +'<h4>Descuentos</h4><table><tr><td>AFP '+pct(AJ.afp)+' %</td><td class="q"></td><td class="n">'+peso(d.afp)+'</td></tr>'
    +'<tr><td>Salud '+pct(AJ.salud)+' %</td><td class="q"></td><td class="n">'+peso(d.salud)+'</td></tr>'
    +'<tr><td>Seguro de cesantía 0,6 %</td><td class="q"></td><td class="n">'+peso(d.ces)+'</td></tr>'
    +'<tr><td>Impuesto único</td><td class="q">base '+peso(d.base)+' · tramo '+pct(d.tasa)+' %</td><td class="n">'+peso(d.impuesto)+'</td></tr>'
-   +'<tr class="fin"><td colspan="2">Líquido a pagar</td><td class="n">'+peso(d.liquido)+'</td></tr></table>'+nota;
+   +'<tr class="fin"><td colspan="2">LÍQUIDO a pagar (después de descuentos)</td><td class="n">'+peso(d.liquido)+'</td></tr></table>'+nota;
 }
 function dif(a,b){const d=a-b;return '<span class="'+(d>=0?'pos':'neg')+'">'+(d>=0?'+':'-')+peso(Math.abs(d))+'</span>';}
 
@@ -217,13 +218,13 @@ function tarjetas(){
     const ap=anio(e,true,1,AJ0),ah=anio(e,true,0,AJ0),sp_=anio(e,false,1,AJ0),sh=anio(e,false,0,AJ0);
     return '<div class="card"><h3>'+t[1]+'</h3><div class="k">'+t[2]+'</div>'
      +'<div class="k">Líquido de un mes · propuesta</div><div class="big">'+peso(p.liquido)+'</div>'
-     +'<div class="row"><span>Hoy</span><span>'+peso(h.liquido)+'</span></div>'
-     +'<div class="row"><span>Diferencia</span><span>'+dif(p.liquido,h.liquido)+'</span></div>'
+     +'<div class="row"><span>Hoy (líquido)</span><span>'+peso(h.liquido)+'</span></div>'
+     +'<div class="row"><span>Diferencia (líquido)</span><span>'+dif(p.liquido,h.liquido)+'</span></div>'
      +'<div class="k" style="margin-top:8px">Líquido de 12 meses · propuesta</div><div class="big">'+peso(ap)+'</div>'
-     +'<div class="row"><span>Hoy</span><span>'+peso(ah)+'</span></div>'
-     +'<div class="row"><span>Diferencia</span><span>'+dif(ap,ah)+'</span></div>'
-     +'<div class="row"><span>Sin camioneta ni aguinaldo</span><span>'+peso(sp_)+'</span></div>'
-     +'<div class="row"><span>Hoy, sin ellos</span><span>'+peso(sh)+'</span></div>'
+     +'<div class="row"><span>Hoy (líquido)</span><span>'+peso(ah)+'</span></div>'
+     +'<div class="row"><span>Diferencia (líquido)</span><span>'+dif(ap,ah)+'</span></div>'
+     +'<div class="row"><span>Sin camioneta ni aguinaldo (líquido)</span><span>'+peso(sp_)+'</span></div>'
+     +'<div class="row"><span>Hoy, sin ellos (líquido)</span><span>'+peso(sh)+'</span></div>'
      +'<button data-esc="'+t[0]+'">Cargar en la calculadora</button></div>';
   }).join('');
   document.querySelectorAll('[data-esc]').forEach(b=>b.onclick=()=>{
@@ -242,12 +243,12 @@ function armarCampos(){
   let h=CAMPOS.map(c=>{
     const p=D.precio[c[2]][1];
     const extra=c[0]==='h'?'<input type="range" id="r_h" min="0" max="'+D.horas_max+'" step="1">':'';
-    return '<label><b>'+c[1]+'</b><span>propuesta '+peso(p)+' por unidad</span>'
+    return '<label><b>'+c[1]+'</b><span>propuesta '+peso(p)+' bruto por unidad</span>'
       +'<input type="number" min="0" step="any" inputmode="decimal" id="c_'+c[0]+'">'+extra+'</label>';
   }).join('');
-  h+='<label class="chk"><input type="checkbox" id="c_cam"> Bono camioneta este mes ('+peso(D.precio.cam[1])+')</label>'
-    +'<label class="chk"><input type="checkbox" id="c_agui"> Aguinaldo este mes ('+peso(D.precio.agui[1])+')</label>'
-    +'<label><b>Bono de cumplimiento</b><span>máximo '+peso(D.precio.cump[1])+' (hoy no se paga)</span><select id="c_cum">'
+  h+='<label class="chk"><input type="checkbox" id="c_cam"> Bono camioneta este mes ('+peso(D.precio.cam[1])+' bruto)</label>'
+    +'<label class="chk"><input type="checkbox" id="c_agui"> Aguinaldo este mes ('+peso(D.precio.agui[1])+' bruto)</label>'
+    +'<label><b>Bono de cumplimiento</b><span>máximo '+peso(D.precio.cump[1])+' bruto (hoy no se paga)</span><select id="c_cum">'
     +[0,70,80,100].map(v=>'<option value="'+v+'">'+(v?v+' %':'No se paga')+'</option>').join('')+'</select></label>';
   $('campos').innerHTML=h;
   CAMPOS.forEach(c=>{
@@ -288,7 +289,7 @@ function render(){
 
 function armarMapa(){
   $('mapa_mes').innerHTML=['Mes normal','Con camioneta','Con aguinaldo y camioneta'].map((t,i)=>'<button data-mm="'+i+'">'+t+'</button>').join('');
-  $('mapa_ver').innerHTML=['Líquido de la propuesta','Diferencia contra hoy'].map((t,i)=>'<button data-mv="'+i+'">'+t+'</button>').join('');
+  $('mapa_ver').innerHTML=['Líquido de la propuesta','Diferencia de líquido contra hoy'].map((t,i)=>'<button data-mv="'+i+'">'+t+'</button>').join('');
   document.querySelectorAll('[data-mm]').forEach(b=>b.onclick=()=>{MAPA_MES=Number(b.dataset.mm);dibujarMapa();});
   document.querySelectorAll('[data-mv]').forEach(b=>b.onclick=()=>{MAPA_VER=Number(b.dataset.mv);dibujarMapa();});
 }
